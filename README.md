@@ -27,6 +27,14 @@ tests/      evaluation scripts and test-scenario notes
 - `main` — reviewed documentation, approved design artifacts, and stable snapshots
 - `development` — active implementation, experimental code, and in-progress notes
 
+## GitHub
+
+https://github.com/Jet-binar/SecureSchool-AI
+
+Clone:
+
+`git clone https://github.com/Jet-binar/SecureSchool-AI.git`
+
 ## Local Setup (planned)
 
 Python 3.11+, OpenCV, and an open-source facial-recognition library on a laptop or PC with a webcam. Sensitive test data stay on encrypted local storage and are not committed to Git.
