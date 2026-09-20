@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Sensitive research data — never commit biometric images or templates
+data/raw/
+data/templates/
+*.jpg
+*.jpeg
+*.png
+*.npy
+consent_forms_completed/
+
+# Keep architecture diagrams that are design artifacts
+!design/*.png
+!docs/**/*.png
+
+# Tools
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
