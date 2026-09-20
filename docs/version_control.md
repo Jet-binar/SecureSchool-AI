@@ -2,6 +2,9 @@
 
 SecureSchool AI uses Git locally and GitHub for remote storage.
 
+Repository: https://github.com/Jet-binar/SecureSchool-AI
+
+
 - `main` holds reviewed documentation and stable snapshots.
 - `development` holds implementation work, architecture files, and in-progress notes.
 - Folders: `src/` (code), `docs/` (documentation), `design/` (diagrams and specifications).
