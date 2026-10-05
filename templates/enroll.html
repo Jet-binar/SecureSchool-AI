@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Enroll · SecureSchool AI{% endblock %}
+{% block content %}
+<h1>Enroll an adult participant</h1>
+<p class="lede">Use a research ID, not a legal name. The photograph is used once to build an encrypted template and is not stored.</p>
+<form method="post" enctype="multipart/form-data" class="card stack" id="enroll-form">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label>Research ID
+    <input name="research_id" required pattern="[A-Za-z0-9][A-Za-z0-9_-]{2,31}" placeholder="A-014">
+  </label>
+  <fieldset>
+    <legend>Permitted zones</legend>
+    {% for zone in zones %}
+    <label class="check"><input type="checkbox" name="zone_ids" value="{{ zone.id }}"> {{ zone.name }}</label>
+    {% endfor %}
+  </fieldset>
+  <label class="check">
+    <input type="checkbox" name="consent" value="yes" required>
+    I confirm this adult gave informed consent for this controlled test.
+  </label>
+  <div class="capture" data-form="enroll-form">
+    <video hidden autoplay playsinline muted></video>
+    <canvas hidden></canvas>
+    <div class="row">
+      <button type="button" class="secondary" data-start>Start camera</button>
+      <button type="button" data-snap>Capture one frame</button>
+      <button type="button" class="secondary" data-stop>Stop camera</button>
+    </div>
+    <p class="hint">Or submit a still image. Up to {{ max_samples }} samples can be stored for one research ID.</p>
+    <input type="file" name="image" accept="image/*">
+  </div>
+  <div class="row">
+    <button type="submit">Save template</button>
+    <button type="submit" class="secondary" name="capture_source" value="server">Use this computer's camera</button>
+  </div>
+</form>
+
+<section class="card">
+  <h2>Enrolled records</h2>
+  {% if people %}
+  <table>
+    <thead><tr><th>Research ID</th><th>Samples</th><th>Zones</th><th></th></tr></thead>
+    <tbody>
+      {% for person in people %}
+      <tr>
+        <td>{{ person.research_id }}</td>
+        <td>{{ person.samples }}</td>
+        <td>{{ person.zones | join(", ") }}</td>
+        <td>
+          <form method="post" action="{{ url_for('delete_enrollment', person_id=person.id) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="text danger" type="submit">Delete templates</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>No one is enrolled yet.</p>
+  {% endif %}
+</section>
+<script src="{{ url_for('static', filename='js/capture.js') }}"></script>
+{% endblock %}

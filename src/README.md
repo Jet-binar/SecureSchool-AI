@@ -1,6 +1,8 @@
 # Source Code
 
-Planned modules:
+The running prototype is the `secureschool` package. Start it from the repository root with `python run.py`.
+
+These Unit 3 files remain as the original module sketches:
 
 - `capture.py` — camera frame acquisition for a single test event
 - `detection.py` — face detection and cropping

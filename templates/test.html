@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Test access · SecureSchool AI{% endblock %}
+{% block content %}
+<h1>Test one access event</h1>
+<p class="lede">The camera stays off until you start it, and it closes after a single frame. A result is a review item, not a disciplinary action.</p>
+<form method="post" enctype="multipart/form-data" class="card stack" id="test-form">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label>Zone
+    <select name="zone_id" required>
+      {% for zone in zones %}
+      <option value="{{ zone.id }}">{{ zone.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <div class="capture" data-form="test-form">
+    <video hidden autoplay playsinline muted></video>
+    <canvas hidden></canvas>
+    <div class="row">
+      <button type="button" class="secondary" data-start>Start camera</button>
+      <button type="button" data-snap>Capture one frame</button>
+      <button type="button" class="secondary" data-stop>Stop camera</button>
+    </div>
+    <input type="file" name="image" accept="image/*">
+  </div>
+  <div class="row">
+    <button type="submit">Check this image</button>
+    <button type="submit" class="secondary" name="capture_source" value="server">Use this computer's camera</button>
+  </div>
+</form>
+{% if result %}
+<section class="card result {{ result.decision }}" aria-live="polite">
+  <h2><span class="pill {{ result.decision }}">{{ result.decision.replace('_', ' ') }}</span></h2>
+  <p>{{ reasons.get(result.reason, result.reason) }}</p>
+  <dl>
+    <div><dt>Zone</dt><dd>{{ result.zone_name }}</dd></div>
+    <div><dt>Research ID</dt><dd>{{ result.research_id or "—" }}</dd></div>
+    <div><dt>Similarity</dt><dd>{{ result.confidence if result.confidence is not none else "—" }}</dd></div>
+    <div><dt>Response</dt><dd>{{ result.elapsed_ms }} ms</dd></div>
+    <div><dt>Email</dt><dd>{{ result.email_status.replace('_', ' ') }}</dd></div>
+  </dl>
+  <p class="hint">No photograph was stored with this decision.</p>
+</section>
+{% endif %}
+<script src="{{ url_for('static', filename='js/capture.js') }}"></script>
+{% endblock %}
