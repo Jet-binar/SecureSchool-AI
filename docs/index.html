@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marsida Mania | SecureSchool AI Capstone Portfolio</title>
+  <meta name="description" content="Digital portfolio for Marsida Mania, MSIT 5910 capstone: SecureSchool AI, a controlled facial-recognition access prototype.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="#home">Marsida Mania</a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#project">Project</a>
+      <a href="#deliverables">Deliverables</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <p class="eyebrow">MSIT Capstone · University of the People</p>
+    <h1>SecureSchool AI</h1>
+    <p class="lede">A controlled academic prototype that distinguishes authorized from unauthorized adults, keeps a human reviewer in the loop, and never treats a match as discipline.</p>
+    <div class="actions">
+      <a class="button" href="https://github.com/Jet-binar/SecureSchool-AI">View the GitHub repository</a>
+      <a class="button secondary" href="#project">See the project</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About</h2>
+    <p>I am completing the Master of Science in Information Technology at the University of the People. SecureSchool AI is my MSIT 5910 capstone. It applies software engineering, machine-learning evaluation, cybersecurity, and privacy design to a limited access-control problem.</p>
+    <p>The work is a research prototype, not a live school product. Minors are not enrolled. Raw photographs are not stored. Unauthorized results open a review item for a person.</p>
+    <ul class="skills">
+      <li>Python · Flask · OpenCV (YuNet / SFace)</li>
+      <li>SQLite · encrypted embeddings · unit and system tests</li>
+      <li>Git / GitHub · layered + MVC architecture</li>
+      <li>Privacy-by-design · mixed quantitative and qualitative metrics</li>
+    </ul>
+  </section>
+
+  <section id="project">
+    <h2>Featured project</h2>
+    <article class="card">
+      <h3>Design and Evaluation of an Intelligent Facial Recognition Security Prototype for Controlled School Access</h3>
+      <p><strong>Role:</strong> Sole designer, developer, tester, and author · <strong>Course:</strong> MSIT 5910 · <strong>Instructor:</strong> Dr. Stella Tonye Whyte</p>
+      <p>The prototype enrolls a consenting adult under a research ID, captures one frame, matches an encrypted embedding, checks a named zone, and returns authorized, unauthorized, or review required. A matcher outage fails closed. Alerts do not lock a door or start a penalty.</p>
+      <p>Evaluation used the Unit 5 decision rules (match 0.363, review 0.28). Controlled trials and 11 automated tests verified the integrated path. Mean decision time stayed far below the two-second project target. Field photographs of volunteers remain a later, approved step.</p>
+      <p><a href="https://github.com/Jet-binar/SecureSchool-AI">github.com/Jet-binar/SecureSchool-AI</a></p>
+    </article>
+  </section>
+
+  <section id="deliverables">
+    <h2>Capstone deliverables</h2>
+    <ul class="deliverables">
+      <li>Runnable prototype and source code (development branch, tags v0.1.0–v0.3.0)</li>
+      <li>Architecture diagram and module contracts</li>
+      <li>Technical reports covering literature, design, implementation, and evaluation</li>
+      <li>Unit tests, system tests, and mixed-metric results</li>
+      <li>Local deployment and configuration notes (no live-school cutover)</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Repository and commit history: <a href="https://github.com/Jet-binar/SecureSchool-AI">GitHub</a></p>
+    <p>This page is the GitHub Pages portfolio for the capstone. The same project can be added to a LinkedIn Featured section as a link.</p>
+  </section>
+
+  <footer>
+    <p>Academic portfolio for MSIT 5910. Not an operational school security product. No biometric images are published here.</p>
+  </footer>
+</body>
+</html>
