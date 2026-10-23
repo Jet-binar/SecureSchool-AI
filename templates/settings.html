@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Settings · SecureSchool AI{% endblock %}
+{% block content %}
+<h1>Settings</h1>
+<p class="lede">Optional email is a text notice to the administrator. It never attaches a face photo. SMTP values stay in the local <code>.env</code> file.</p>
+<form method="post" class="card stack">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label class="check">
+    <input type="checkbox" name="email_enabled" value="yes" {% if email_enabled %}checked{% endif %}>
+    Send a text email when a result is unauthorized
+  </label>
+  <p class="hint">
+    Camera backend for the computer-camera button: <strong>{{ camera_backend }}</strong>.
+    SMTP credentials: <strong>{{ "ready" if smtp_ready else "not set" }}</strong>.
+  </p>
+  <button type="submit">Save</button>
+</form>
+{% endblock %}

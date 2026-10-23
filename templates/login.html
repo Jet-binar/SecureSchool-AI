@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Sign in · SecureSchool AI{% endblock %}
+{% block content %}
+<section class="narrow">
+  <p class="eyebrow">Controlled prototype</p>
+  <h1>Administrator sign in</h1>
+  <p class="lede">Enrollment, alerts, and audit records are limited to an authenticated administrator.</p>
+  <form method="post" class="card stack">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Username <input name="username" autocomplete="username" required></label>
+    <label>Password <input name="password" type="password" autocomplete="current-password" required></label>
+    <button type="submit">Sign in</button>
+  </form>
+</section>
+{% endblock %}

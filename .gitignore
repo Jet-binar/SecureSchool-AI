@@ -5,14 +5,20 @@ __pycache__/
 venv/
 .env
 
-# Sensitive research data — never commit biometric images or templates
-data/raw/
-data/templates/
+# Sensitive research data — never commit biometric images, templates, or keys
+data/
+models/*.onnx
 *.jpg
 *.jpeg
 *.png
+*.bmp
 *.npy
 consent_forms_completed/
+_doc_extracts/
+.pytest_cache/
+
+# Earlier Raspberry Pi project; it has its own repository
+Security-System-/
 
 # Keep architecture diagrams that are design artifacts
 !design/*.png

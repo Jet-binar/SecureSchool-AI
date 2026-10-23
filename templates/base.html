@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}SecureSchool AI{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+<body>
+  {% if current_user %}
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('dashboard') }}">SecureSchool AI</a>
+    <nav>
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('enroll') }}">Enroll</a>
+      <a href="{{ url_for('test_access') }}">Test access</a>
+      <a href="{{ url_for('alerts') }}">Alerts</a>
+      <a href="{{ url_for('zones') }}">Zones</a>
+      <a href="{{ url_for('audit') }}">Audit</a>
+      <a href="{{ url_for('settings') }}">Settings</a>
+    </nav>
+    <form method="post" action="{{ url_for('logout') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button class="text" type="submit">Log out</button>
+    </form>
+  </header>
+  {% endif %}
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <p class="flash {{ category }}" role="status">{{ message }}</p>
+      {% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

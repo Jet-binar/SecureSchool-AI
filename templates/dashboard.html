@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · SecureSchool AI{% endblock %}
+{% block content %}
+<p class="eyebrow">School access prototype</p>
+<h1>Dashboard</h1>
+<p class="lede">A capture runs only when you start a test. The system keeps an embedding for matching, writes an alert for a person to review, and does not apply a penalty on its own.</p>
+{% if not models_ready %}
+<p class="flash error">Face models are not on this PC yet. The first enrollment or test will download them.</p>
+{% endif %}
+<section class="stats">
+  <article><span>Enrolled adults</span><strong>{{ summary.people }}</strong></article>
+  <article><span>Open alerts</span><strong>{{ summary.open_alerts }}</strong></article>
+  <article><span>Recorded decisions</span><strong>{{ summary.events }}</strong></article>
+</section>
+<p><a class="button" href="{{ url_for('test_access') }}">Start a test capture</a></p>
+<section class="card">
+  <h2>Recent decisions</h2>
+  {% if events %}
+  <table>
+    <thead><tr><th>Time (UTC)</th><th>Zone</th><th>Decision</th><th>Research ID</th><th>Response</th></tr></thead>
+    <tbody>
+      {% for event in events %}
+      <tr>
+        <td>{{ event.created_at }}</td>
+        <td>{{ event.zone_name }}</td>
+        <td><span class="pill {{ event.decision }}">{{ event.decision.replace('_', ' ') }}</span></td>
+        <td>{{ event.research_id or "—" }}</td>
+        <td>{{ event.elapsed_ms }} ms</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>No access checks yet.</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Zones · SecureSchool AI{% endblock %}
+{% block content %}
+<h1>Zones</h1>
+<p class="lede">A recognized person is allowed only in the zones selected at enrollment. A missing permission is a denial.</p>
+<form method="post" class="card stack">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label>Name <input name="name" required maxlength="60"></label>
+  <label>Description <input name="description" maxlength="160"></label>
+  <button type="submit">Add zone</button>
+</form>
+<section class="card">
+  <table>
+    <thead><tr><th>Zone</th><th>Description</th></tr></thead>
+    <tbody>
+      {% for zone in zones %}
+      <tr><td>{{ zone.name }}</td><td>{{ zone.description or "—" }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

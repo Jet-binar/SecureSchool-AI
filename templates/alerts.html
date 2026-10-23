@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Alerts · SecureSchool AI{% endblock %}
+{% block content %}
+<h1>Alerts for review</h1>
+<p class="lede">Unauthorized and unclear results wait here. Marking an alert reviewed records your decision. It does not lock a door or start a penalty.</p>
+{% if open_alerts %}
+{% for alert in open_alerts %}
+<article class="card alert">
+  <header>
+    <span class="pill {{ alert.decision }}">{{ alert.decision.replace('_', ' ') }}</span>
+    <time>{{ alert.created_at }} UTC</time>
+  </header>
+  <p>{{ reasons.get(alert.reason, alert.reason) }}</p>
+  <dl>
+    <div><dt>Zone</dt><dd>{{ alert.zone_name }}</dd></div>
+    <div><dt>Research ID</dt><dd>{{ alert.research_id or "—" }}</dd></div>
+    <div><dt>Similarity</dt><dd>{{ alert.confidence if alert.confidence is not none else "—" }}</dd></div>
+    <div><dt>Response</dt><dd>{{ alert.elapsed_ms }} ms</dd></div>
+  </dl>
+  <form method="post" action="{{ url_for('review_alert', event_id=alert.id) }}" class="stack">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Review note
+      <input name="note" maxlength="300" placeholder="What you decided after looking at this event">
+    </label>
+    <button type="submit">Mark reviewed</button>
+  </form>
+</article>
+{% endfor %}
+{% else %}
+<p class="card">No open alerts.</p>
+{% endif %}
+{% if reviewed %}
+<section class="card">
+  <h2>Already reviewed</h2>
+  <table>
+    <thead><tr><th>Time</th><th>Zone</th><th>Decision</th><th>Note</th></tr></thead>
+    <tbody>
+      {% for alert in reviewed %}
+      <tr>
+        <td>{{ alert.reviewed_at }}</td>
+        <td>{{ alert.zone_name }}</td>
+        <td>{{ alert.decision.replace('_', ' ') }}</td>
+        <td>{{ alert.review_note or "—" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endif %}
+{% endblock %}

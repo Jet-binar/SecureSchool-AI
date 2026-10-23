@@ -31,13 +31,25 @@ tests/      evaluation scripts and test-scenario notes
 
 https://github.com/Jet-binar/SecureSchool-AI
 
+Portfolio (GitHub Pages): https://jet-binar.github.io/SecureSchool-AI/
+
 Clone:
 
 `git clone https://github.com/Jet-binar/SecureSchool-AI.git`
 
-## Local Setup (planned)
+## Run on this PC
 
-Python 3.11+, OpenCV, and an open-source facial-recognition library on a laptop or PC with a webcam. Sensitive test data stay on encrypted local storage and are not committed to Git.
+From the project folder:
+
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe run.py
+```
+
+Open http://127.0.0.1:5000 and sign in as `admin`. The first launch writes the password to `data/initial_admin_password.txt`. That folder stays on this computer and is not committed.
+
+Face detection uses OpenCV YuNet. Matching uses OpenCV SFace. Templates are encrypted locally. Optional email is text only and is configured in `.env` (see `.env.example`).
 
 ## License
 

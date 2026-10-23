@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Audit · SecureSchool AI{% endblock %}
+{% block content %}
+<h1>Audit log</h1>
+<p class="lede">Sign-ins, enrollment changes, decisions, and alert reviews. The log does not contain face templates.</p>
+<section class="card">
+  <table>
+    <thead><tr><th>Time (UTC)</th><th>Actor</th><th>Action</th><th>Detail</th></tr></thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <td>{{ row.created_at }}</td>
+        <td>{{ row.actor }}</td>
+        <td>{{ row.action }}</td>
+        <td>{{ row.detail or "—" }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="4">No audit events yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
